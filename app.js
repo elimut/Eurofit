@@ -5,6 +5,7 @@ const cors = require('cors');
 
 app.use(cors());
 path.abonnementPath(app);
+path.clubPath(app);
 
 app.listen(port, ()=>{
     console.log(`Serveur is running on ${port}`);
