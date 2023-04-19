@@ -23,3 +23,4 @@ cors:
 
 index. js routeur crée à la main
 
+npm i express express-myconnection mysql nodemon cors

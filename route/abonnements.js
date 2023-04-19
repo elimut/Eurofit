@@ -87,20 +87,6 @@ const path = (app)=>{
             res.json(results);
         }); 
     });
-    app.get('/:table/:id', (req, res) => {
-        const tableName = req.params.table;
-        const id_abonnement = req.params.id;
-        const table = tables.find(t => t.name === tableName);
-        if (!table) {
-            throw new Error(`La table ${tableName} n'existe pas`);
-          }
-          connection.query(table.query, [], (err, results) => {
-            if (err) {
-              throw err;
-            }
-            res.json(results);
-          });
-        });
 
 /* Post, endpoint création nouvel abonnement, re voir les points de terminaison*/
     app.post('/abonnement', (req, res) =>{
