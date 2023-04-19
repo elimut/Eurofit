@@ -30,7 +30,7 @@ const path = (app)=>{
         }); 
     })
     // path fonction 
-    app.get('/abonnement:id', (req, res)=>{
+    app.get('/abonnement/:id', (req, res)=>{
         const id_abonnement = req.params.id;
         connection.query('SELECT * FROM abonnement WHERE id_abonnement = ?;', [id_abonnement], (err, results)=>{
             if (err) throw err;
@@ -39,8 +39,8 @@ const path = (app)=>{
     })
     // endpoint création nouvel abonnement
     app.post('/abonnement', (req, res) =>{
-        const {titre, tout_club, toutes_salles, tout_pays, reduc_complement, reduc_medecine, reduc_coach, tarif} = req.body;
-         connection.query('INSERT INTO abonnement(titre, tout_club, toutes_salles, tout_pays, reduc_complement, reduc_medecine, reduc_coach, tarif) VALUES (?,?,?,?,?,?,?,?);',[titre, tout_club, toutes_salles, tout_pays, reduc_complement, reduc_medecine, reduc_coach, tarif], (err, results)=>{
+        const {type, prix, bilan_IMC, acces_club} = req.body;
+         connection.query('INSERT INTO abonnement(type, prix, bilan_IMC, acces_club) VALUES (?,?,?,?);',[type, prix, bilan_IMC, acces_club], (err, results)=>{
             if (err)   throw err;
             res.json(results);
         })
@@ -53,22 +53,50 @@ const path = (app)=>{
                 res.status(404).send('Abonnement non trouvé');
             }
             else{
-                res.status(204).send('Abonnement supprimé avec succès');
+                res.status(200).json({ message: 'Abonnement supprimé avec succès'});
+                // res.status(200).send('Abonnement supprimé avec succès');
+                // Différence entre res.send et res.json dans Express.js: send, message sinon objet
             }
         })
     })
-    app.patch('/abonnement/:id', (req, res)=>{
+    app.put('/abonnement/:id', (req, res) =>{
         const id_abonnement = req.params.id;
-        connection.query('DELETE FROM abonnement WHERE id_abonnement = ?', [id_abonnement], (err, results)=>{
-            if (err)throw err;
-            if (results.affectedRows === 0){
-                res.status(404).send('Abonnement non trouvé');
-            }
-            else{
-                res.status(204).send('Abonnement supprimé avec succès');
-            }
+        const {type, prix, bilan_IMC, acces_club} = req.body;
+        // dans body 
+         connection.query('UPDATE abonnement SET type = ?, prix = ?, bilan_IMC = ?, acces_club = ? WHERE id_abonnement = ?;',[type, prix, bilan_IMC, acces_club, id_abonnement], (err, results)=>{
+            if (err)   throw err;
+            res.json(results);
         })
     })
+    app.patch('/abonnement/:id/:column', (req, res) =>{
+        const id_abonnement = req.params.id;
+        const column = req.params.column;
+        let value = {};
+        if (column === 'type') {
+           requeteSql = 'UPDATE abonnement SET type = ? WHERE id_abonnement = ?;' 
+           value = req.body.type
+        } else if (column === 'prix') {
+            requeteSql = 'UPDATE abonnement SET prix = ? WHERE id_abonnement = ?;'
+            value = req.body.prix
+        } else if (column === 'acces_club') {
+            requeteSql = 'UPDATE abonnement SET acces_club = ? WHERE id_abonnement = ?;'
+            value = req.body.acces_club
+        } else if (column === 'bilan_IMC') {
+            requeteSql = 'UPDATE abonnement SET bilan_IMC = ? WHERE id_abonnement = ?;'
+            value = req.body.bilan_IMC
+        } else{
+            throw err;
+        }
+        // dans body 
+         connection.query(
+            requeteSql,
+            [value, id_abonnement], 
+            (err, results)=>{
+            if (err)  throw err;
+            res.json(results);
+        })
+    })
+    // Les méthodes PUT et PATCH ont des significations différentes : PUT, remplace les données par celle qui sont envoyées dans la requête. PATCH, permet la modification partielle d'une ressource en fusionnant les données envoyées avec les données déjà présentes ou grâce à l'utilisation d'opération de modification.
 }
 
 module.exports = path;
