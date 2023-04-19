@@ -24,3 +24,11 @@ cors:
 index. js routeur crée à la main
 
 npm i express express-myconnection mysql nodemon cors
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' ; ALTER USER 'root'@'localhost' IDENTIFIÉ AVEC mysql_native_password BY 'password' ; PRIVILÈGES FLUSH ;
+
+La première commande change le mot de passe de l'utilisateur 'root' dans MySQL pour la connexion localhost en 'password'. Cependant, selon la version de MySQL et le plugin d'authentification utilisé, cette commande peut ne pas fonctionner comme prévu.
+
+La deuxième commande change le plugin d'authentification pour l'utilisateur 'root' en 'mysql_native_password' et définit le mot de passe en 'password'. Ceci est nécessaire si le plugin d'authentification est défini sur 'caching_sha2_password', qui est le plugin par défaut pour MySQL 8.0 et les versions ultérieures.
+
+La commande finale 'FLUSH PRIVILEGES' est utilisée pour recharger les tables de droits dans MySQL. Cela garantit que toutes les modifications apportées aux comptes d'utilisateurs sont appliquées immédiatement.
+
