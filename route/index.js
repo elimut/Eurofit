@@ -1,7 +1,7 @@
 // création du routeur à la main
 const abonnementPath = require('./abonnements');
-const clubPath = require('./club');
+const membrePath = require('./membre');
 
 // module.exports = {abonnementPath};
 // module.exports = {clubPath};
-module.exports = {abonnementPath, clubPath}
+module.exports = {abonnementPath, membrePath}
