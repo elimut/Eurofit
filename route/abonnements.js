@@ -1,4 +1,4 @@
-// relatif à la table abonnements
+// relatif à la table abonnements, composant pour abonnement
 const {connection} = require('../serveur');
 // récupération module connection du fichier serveur
 
@@ -148,6 +148,15 @@ const path = (app)=>{
         })
     })
     // Les méthodes PUT et PATCH ont des significations différentes : PUT, remplace les données par celle qui sont envoyées dans la requête. PATCH, permet la modification partielle d'une ressource en fusionnant les données envoyées avec les données déjà présentes ou grâce à l'utilisation d'opération de modification.
+    app.innerJoin('/abonnement/', (req, res) =>{
+        const id_abonnement = req.params.id;
+        const {type, prix, bilan_IMC, acces_club} = req.body;
+        // dans body 
+         connection.query('SELECT  FROM  abonnement SET type = ?, prix = ?, bilan_IMC = ?, acces_club = ? WHERE id_abonnement = ?;',[type, prix, bilan_IMC, acces_club, id_abonnement], (err, results)=>{
+            if (err)   throw err;
+            res.json(results);
+        })
+    })
 }
 
 module.exports = path;
@@ -156,7 +165,6 @@ module.exports = path;
 // dans thunder client: localhost:3000/abonnements
 // pas de render car api, pas de front
 // put tout modifier, patch une seule valeur
-
 
 
 // Code sofian:

@@ -16,25 +16,25 @@ const path = (app)=>{
             res.json(results);
         }); 
     });
-    app.post('/club', (req, res) =>{
-        const {nom, telephone,mail, licence} = req.body;
-         connection.query('INSERT INTO club(nom, telephone,mail, licence) VALUES (?,?,?,?);',[nom, telephone,mail, licence], (err, results)=>{
-            if (err)   throw err;
-            res.json(results);
-        })
-    })
-    // app.delete('/abonnement/:id', (req, res)=>{
-    //     const id_abonnement = req.params.id;
-    //     connection.query('DELETE FROM abonnement WHERE id_abonnement = ?', [id_abonnement], (err, results)=>{
-    //         if (err)throw err;
-    //         if (results.affectedRows === 0){
-    //             res.status(404).send('Abonnement non trouvé');
-    //         }
-    //         else{
-    //             res.status(200).json({ message: 'Abonnement supprimé avec succès'});
-    //         }
+    // app.post('/club', (req, res) =>{
+    //     const {nom, telephone ,mail, licence} = req.body;
+    //      connection.query('INSERT INTO club(nom, telephone ,mail, licence) VALUES (?,?,?,?);',[nom, telephone,mail, licence], (err, results)=>{
+    //         if (err)   throw err;
+    //         res.json(results);
     //     })
     // })
+    app.delete('/club/:id', (req, res)=>{
+        const id_club = req.params.id;
+        connection.query('DELETE FROM club WHERE id_club = ?', [id_club], (err, results)=>{
+            if (err)throw err;
+            if (results.affectedRows === 0){
+                res.status(404).send('club non trouvé');
+            }
+            else{
+                res.status(200).json({ message: 'club supprimé avec succès'});
+            }
+        })
+    })
     // app.put('/abonnement/:id', (req, res) =>{
     //     const id_abonnement = req.params.id;
     //     const {type, prix, bilan_IMC, acces_club} = req.body;

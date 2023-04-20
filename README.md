@@ -1,9 +1,7 @@
 # Eurofit
- 
-Création serveur avec express
-require express
-mysql
-port
+
+Dans cet exercice nous créons un serveur grâce à express, et un routeur afin de faire des requêtes sur mySql.
+Création serveur avec express voir app.js et routeur voir index.js.
 
 dot env -> .env
 
@@ -32,3 +30,4 @@ La deuxième commande change le plugin d'authentification pour l'utilisateur 'ro
 
 La commande finale 'FLUSH PRIVILEGES' est utilisée pour recharger les tables de droits dans MySQL. Cela garantit que toutes les modifications apportées aux comptes d'utilisateurs sont appliquées immédiatement.
 
+par rapport à une URL -> requête, ici requête mysql
