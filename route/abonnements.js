@@ -33,8 +33,7 @@ const path = (app)=>{
             if (err) throw err;
             res.json(results);
         }); 
-    })
-
+    });
 /*Get pour toutes tables définies dans le tableau tables, modifiable*/
     // const tables = [
     //     { name: 'abonnement', query: 'SELECT * FROM abonnement;' },
@@ -108,8 +107,8 @@ const path = (app)=>{
                 // res.status(200).send('Abonnement supprimé avec succès');
                 // Différence entre res.send et res.json dans Express.js: send, message sur interface, notamment page HTML, plutôt destiné à l' user sinon objet
             }
-        })
-    })
+        });
+    });
     app.put('/abonnement/:id', (req, res) =>{
         const id_abonnement = req.params.id;
         const {type, prix, bilan_IMC, acces_club} = req.body;
@@ -118,7 +117,7 @@ const path = (app)=>{
             if (err)   throw err;
             res.json(results);
         });
-    })
+    });
     app.patch('/abonnement/:id/:column', (req, res) =>{
         const id_abonnement = req.params.id;
         const column = req.params.column;
@@ -145,8 +144,8 @@ const path = (app)=>{
             (err, results)=>{
             if (err)  throw err;
             res.json(results);
-        })
-    })
+        });
+    });
     // Les méthodes PUT et PATCH ont des significations différentes : PUT, remplace les données par celle qui sont envoyées dans la requête. PATCH, permet la modification partielle d'une ressource en fusionnant les données envoyées avec les données déjà présentes ou grâce à l'utilisation d'opération de modification.
     
     // app.innerJoin('/abonnement/:id', (req, res) =>{
