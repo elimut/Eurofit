@@ -16,15 +16,7 @@ const path = (app)=>{
             if (err) throw err;
             res.json(results);
         }); 
-    });
-
-    // app.post('/membre', (req, res) =>{
-    //     const {type, prix, bilan_IMC, acces_club} = req.body;
-    //      connection.query('INSERT INTO membre(type, prix, bilan_IMC, acces_club) VALUES (?,?,?,?);',[type, prix, bilan_IMC, acces_club], (err, results)=>{
-    //         if (err)   throw err;
-    //         res.json(results);
-    //     })
-    // })
+    });    
     app.delete('/membre/:id', (req, res)=>{
         const id_membre = req.params.id;
         connection.query('DELETE FROM membre WHERE id_membre = ?', [id_membre], (err, results)=>{
@@ -71,6 +63,13 @@ const path = (app)=>{
     //         [value, id_abonnement], 
     //         (err, results)=>{
     //         if (err)  throw err;
+    //         res.json(results);
+    //     })
+    // })
+        // app.post('/membre', (req, res) =>{
+    //     const {type, prix, bilan_IMC, acces_club} = req.body;
+    //      connection.query('INSERT INTO membre(type, prix, bilan_IMC, acces_club) VALUES (?,?,?,?);',[type, prix, bilan_IMC, acces_club], (err, results)=>{
+    //         if (err)   throw err;
     //         res.json(results);
     //     })
     // })

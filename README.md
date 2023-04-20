@@ -31,3 +31,7 @@ La deuxième commande change le plugin d'authentification pour l'utilisateur 'ro
 La commande finale 'FLUSH PRIVILEGES' est utilisée pour recharger les tables de droits dans MySQL. Cela garantit que toutes les modifications apportées aux comptes d'utilisateurs sont appliquées immédiatement.
 
 par rapport à une URL -> requête, ici requête mysql
+
+un utilisateur lorsqu'il consomme une api ne va pas faire plusieurs recherches
+ex: souhaite liste de tous les membres qui contiennent le prénom untel avec LIKE.
+dans membre
