@@ -147,26 +147,6 @@ const path = (app)=>{
         });
     });
     // Les méthodes PUT et PATCH ont des significations différentes : PUT, remplace les données par celle qui sont envoyées dans la requête. PATCH, permet la modification partielle d'une ressource en fusionnant les données envoyées avec les données déjà présentes ou grâce à l'utilisation d'opération de modification.
-<<<<<<< Updated upstream
-    
-    // app.innerJoin('/abonnement/:id', (req, res) =>{
-    //     const id_abonnement = req.params.id;
-    //      connection.query('SELECT nom, type FROM  abonnement JOIN club WHERE id_abonnement.abonnement = club.id_club;',[type, prix, bilan_IMC, acces_club, id_abonnement], (err, results)=>{
-    //         if (err)   throw err;
-    //         res.json(results);
-    //     })
-    // })
-=======
-    app.innerJoin('/abonnement/', (req, res) =>{
-        const id_abonnement = req.params.id;
-        const {type, prix, bilan_IMC, acces_club} = req.body;
-        // dans body 
-         connection.query('SELECT  FROM  abonnement SET type = ?, prix = ?, bilan_IMC = ?, acces_club = ? WHERE id_abonnement = ?;',[type, prix, bilan_IMC, acces_club, id_abonnement], (err, results)=>{
-            if (err)   throw err;
-            res.json(results);
-        });
-    });
->>>>>>> Stashed changes
 }
 
 module.exports = path;
