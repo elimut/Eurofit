@@ -10,5 +10,5 @@ path.clubPath(app);
 
 app.listen(port, ()=>{
     console.log(`Serveur is running on ${port}`);
-})
+});
 
